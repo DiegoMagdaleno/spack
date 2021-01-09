@@ -1,4 +1,4 @@
-# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -37,7 +37,9 @@ class Pcre2(AutotoolsPackage):
 
     @property
     def libs(self):
-        libs = find_libraries('libpcre2*',
-                              root=self.prefix.lib,
-                              recursive=False)
-        return libs
+        if '+multibyte' in self.spec:
+            name = 'libpcre2-32'
+        else:
+            name = 'libpcre2-8'
+
+        return find_libraries(name, root=self.prefix, recursive=True)

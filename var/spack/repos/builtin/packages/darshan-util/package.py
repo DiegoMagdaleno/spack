@@ -1,4 +1,4 @@
-# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -30,6 +30,8 @@ class DarshanUtil(Package):
     variant('bzip2', default=False, description="Enable bzip2 compression")
     depends_on('zlib')
     depends_on('bzip2', when="+bzip2", type=("build", "link", "run"))
+
+    patch('retvoid.patch', when='@3.2.0:3.2.1')
 
     def install(self, spec, prefix):
 

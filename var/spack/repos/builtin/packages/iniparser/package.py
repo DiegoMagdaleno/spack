@@ -1,10 +1,7 @@
-# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
-from spack import *
-import glob
 
 
 class Iniparser(MakefilePackage):
@@ -20,9 +17,6 @@ class Iniparser(MakefilePackage):
 
     def install(self, spec, prefix):
         mkdirp(prefix.include)
-        with working_dir('src'):
-            for files in glob.glob('*.h'):
-                install(files, prefix.include)
         mkdirp(prefix.lib)
-        for files in glob.glob('libiniparser.*'):
-            install(files, prefix.lib)
+        install('src/*.h', prefix.include)
+        install('libiniparser.*', prefix.lib)
