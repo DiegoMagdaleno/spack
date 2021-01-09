@@ -11,4 +11,5 @@
 #   ~/.spack/repos.yaml
 # -------------------------------------------------------------------------
 repos:
+  - /Data/Spack/Repos/Utopia
   - $spack/var/spack/repos/builtin

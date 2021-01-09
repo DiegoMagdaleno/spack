@@ -16,7 +16,6 @@ from llnl.util.filesystem import working_dir, force_remove
 from spack.package import PackageBase, run_after, run_before
 from spack.util.executable import Executable
 
-
 class AutotoolsPackage(PackageBase):
     """Specialized class for packages built using GNU Autotools.
 
@@ -332,6 +331,8 @@ class AutotoolsPackage(PackageBase):
         """
         options = getattr(self, 'configure_flag_args', [])
         options += ['--prefix={0}'.format(prefix)]
+        options += ['--sysconfdir=/System/Settings']
+        options += ['--mandir={0}/share/man'.format(prefix)]
         options += self.configure_args()
 
         with working_dir(self.build_directory, create=True):
